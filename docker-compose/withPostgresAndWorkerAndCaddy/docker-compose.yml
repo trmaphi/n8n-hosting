@@ -87,6 +87,9 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - SUBDOMAIN=${SUBDOMAIN}
     volumes:
       - ./volumes/caddy:/data
       - ${DATA_FOLDER}/caddy_config:/config
