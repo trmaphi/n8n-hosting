@@ -10,6 +10,9 @@ command in the current folder.
 **IMPORTANT:** But before you do that change the default users and passwords in the [`.env`](.env) file!
 
 ```
+mkdir volumes
+sudo chown -R 1000:1000 ./volumes
+sudo chmod -R 755 ./volumes
 docker-compose up -d
 ```
 
@@ -22,3 +25,4 @@ docker-compose stop
 ## Configuration
 
 The default name of the database, user and password for PostgreSQL can be changed in the [`.env`](.env) file in the current directory.
+

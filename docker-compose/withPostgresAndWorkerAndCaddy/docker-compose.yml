@@ -11,6 +11,9 @@ x-shared: &shared
     - DB_POSTGRESDB_USER=${POSTGRES_NON_ROOT_USER}
     - DB_POSTGRESDB_PASSWORD=${POSTGRES_NON_ROOT_PASSWORD}
     - EXECUTIONS_MODE=queue
+    - EXECUTIONS_DATA_PRUNE=true
+    - EXECUTIONS_DATA_MAX_AGE=168
+    - EXECUTIONS_DATA_PRUNE_MAX_COUNT=50000
     - QUEUE_BULL_REDIS_HOST=redis
     - QUEUE_HEALTH_CHECK_ACTIVE=true
     - N8N_ENCRYPTION_KEY=${ENCRYPTION_KEY}
@@ -68,7 +71,7 @@ services:
       - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
     volumes:
       - ./volumes/n8n:/home/node/.n8n
-      - ${DATA_FOLDER}/local_files:/files
+      - ./local_files:/files
 
   n8n-worker:
     <<: *shared
@@ -87,5 +90,5 @@ services:
       - SUBDOMAIN=${SUBDOMAIN}
     volumes:
       - ./volumes/caddy:/data
-      - ${DATA_FOLDER}/caddy_config:/config
-      - ${DATA_FOLDER}/caddy_config/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy_config:/config
+      - ./caddy_config/Caddyfile:/etc/caddy/Caddyfile:ro
