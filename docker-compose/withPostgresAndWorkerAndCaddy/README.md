@@ -11,8 +11,8 @@ command in the current folder.
 
 ```
 mkdir volumes
-sudo chown -R 1000:1000 ./volumes
-sudo chmod -R 755 ./volumes
+docker volume create n8n_data --driver local --opt device=./volumes/n8n_data --opt uid=1000
+sudo chmod -R 755 ./volumes/n8n_data
 docker-compose up -d
 ```
 
